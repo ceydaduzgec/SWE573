@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ceydaduzgec/SWE573">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/boun.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">SWE 573 Software Development Practice</h3>
@@ -64,8 +64,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+This projects is for the SWE 573 Software Development Practice course of Boğaziçi University on Fall'22 and supervised by [Suzan Uskudarlı](https://github.com/uskudarli). It will be updated each week in order to reflect projects process which is divided into 3 Milestones. You can find out more about it on the [wiki](https://github.com/ceydaduzgec/SWE573/wiki).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -170,7 +169,7 @@ Project Link: [https://github.com/ceydaduzgec/SWE573](https://github.com/ceydadu
 [license-url]: https://github.com/ceydaduzgec/SWE573/LICENSE.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/ceydaduzgec/
 [product-screenshot]: images/screenshot.png
 
 [Django-image]: https://img.shields.io/badge/Django-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
