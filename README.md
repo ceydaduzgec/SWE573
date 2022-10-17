@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ceydaduzgec/SWE573">
-    <img src="images/boun.png" alt="Logo" width="150" height="150">
+    <img src="images/boun.png" alt="Logo" width="380" height="200">
   </a>
 
 <h3 align="center">SWE 573 Software Development Practice</h3>
