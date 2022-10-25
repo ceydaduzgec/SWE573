@@ -93,6 +93,31 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
    ```sh
    git clone https://github.com/ceydaduzgec/SWE573.git
    ```
+2. Create a [virtual environment](https://docs.python.org/3/library/venv.html#creating-virtual-environments
+   "Official documentation") in the project folder:
+
+    `python -m venv venv`
+
+3. [Activate](https://docs.python.org/3/library/venv.html#creating-virtual-environments:~:text=Command%20to%20activate%20virtual%20environment
+   "Official documentation") the virtual environment:
+
+    `source venv/bin/activate`
+
+4. Install the requirements:
+
+    `pip install -r requirements/local.txt`
+
+5. Compose Docker or run the stack if it already exists.
+
+    `docker-compose -f local.yml build` or `docker-compose -f local.yml up`
+
+6. Migrate models.
+
+    `python manage.py migrate`
+
+7. Run on your local.
+
+    `python manage.py runserver 0.0.0.0:8000`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -206,4 +231,4 @@ Project Link: [https://github.com/ceydaduzgec/SWE573](https://github.com/ceydadu
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com
