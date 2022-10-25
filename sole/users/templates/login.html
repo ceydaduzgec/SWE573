@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+  {% include "form_card.html" with title="Log in" button_text="Log in" %}
+  <div class="text-center text-muted mt-1">
+    Do not have an account? <a href="{% url "users:signup" %}">Sign up</a>
+  </div>
+{% endblock content %}
