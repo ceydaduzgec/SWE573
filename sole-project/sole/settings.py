@@ -45,7 +45,6 @@ AUTH_USER_MODEL = "users.User"
 
 INSTALLED_APPS = [
     # Django Apps
-    "jazzmin",
     "sole.users",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -96,10 +95,8 @@ WSGI_APPLICATION = "sole.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "ceyda",
-        "USER": "cduzgec",
-        "PASSWORD": "rbjh.ts67d8=6asdb38rf",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
