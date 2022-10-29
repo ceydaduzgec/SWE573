@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <img class="img-fluid mb-3" style="max-height:400px" src="{{ post.image.url }}"/>
+    <form enctype="multipart/form-data" method="post" class="uni_form">
+      {% csrf_token %} <!--Security feature of Django to determine who sent the request -->
+      {{form |crispy }}
+      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-danger" type="submit" formaction="/delete/{{post.id}}/">Delete</button>
+      <a href="{% url "posts:list" %}"><button class="btn btn-light" type="submit">Cancel</button>
+    </form>
+  </div>
+{% endblock content %}

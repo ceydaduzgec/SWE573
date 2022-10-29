@@ -1,4 +1,0 @@
-ipdb
-ptvsd
-pre-commit
-flake8==4.0.1
