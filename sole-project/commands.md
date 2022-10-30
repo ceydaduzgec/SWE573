@@ -1,6 +1,15 @@
-## Django
-`python manage.py test  --settings sole.settings.testing --parallel=20 --keepdb`
+## Virtual Environment
+`python -m venv venv`
 
+`source venv/bin/activate`
+
+`pip install -r requirements.txt`
+
+## Run Project
+
+`source tools/run_development.sh`
+
+`source tools/exec_bash.sh`
 
 ## Docker
 `docker build --tag <project_name> .` - build and name the image
@@ -69,15 +78,4 @@ terminal without being buffered and that allows displaying
 the application’s output in real-time. 
 
 
-    `$ python -m venv venv`
-    `$ source venv/bin/activate`
-    pip install -r requirements.txt
 
-
-
-
-
-        depends_on:
-      - db
-  db:
-    image: postgres
