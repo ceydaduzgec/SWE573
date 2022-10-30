@@ -1,0 +1,21 @@
+name: Linter CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Run flake8
+      - name: Python flake8 Lint
+        uses: py-actions/flake8@v2.0.0
