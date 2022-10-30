@@ -72,3 +72,12 @@ the application’s output in real-time.
     `$ python -m venv venv`
     `$ source venv/bin/activate`
     pip install -r requirements.txt
+
+
+
+
+
+        depends_on:
+      - db
+  db:
+    image: postgres
