@@ -12,3 +12,4 @@ factory-boy==3.2.1
 ipdb
 ptvsd
 pre-commit
+django-environ
