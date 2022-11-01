@@ -3,7 +3,7 @@ name: Pull request
 about: Create issue for pull request.
 title: "[PULLREQUEST]"
 labels: project management
-assignees: denizdikbiyik
+assignees: ceydaduzgec
 
 ---
 
