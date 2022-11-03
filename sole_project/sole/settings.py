@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 from pathlib import Path
 
 from django.contrib.messages import constants as messages
+from environ import Env
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",
@@ -30,11 +30,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+env = Env()
+env.read_env(env_file=".env")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib"
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DJANGO_DEBUG", default=True)
 # CHANGE THIS AFTER DONE
 
 ALLOWED_HOSTS = [
@@ -111,11 +116,11 @@ DATABASES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "sole",
-        "USER": "sole_dbu",
-        "PASSWORD": "test",
-        "HOST": "postgres",
-        "PORT": "5432",
+        "NAME": env("DB_NAME", default="sole_db"),
+        "USER": env("DB_USER", default="jay"),
+        "PASSWORD": env("DB_PASSWORD", default="test"),
+        "HOST": env("DB_HOST", default="localhost"),
+        "PORT": env("DB_PORT", default="5432"),
     }
 }
 
