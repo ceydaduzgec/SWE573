@@ -93,6 +93,33 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
    ```sh
    git clone https://github.com/ceydaduzgec/SWE573.git
    ```
+2. Open project with your favorite code editor and a new terminal.
+   ```sh
+   cd sole_project
+   ```
+3. Run Docker infastructure. 
+   ```sh
+   source tools/run_development.sh
+   ```
+4. Migrate the database.
+  ```python
+  python manage.py migrate
+  ```
+
+5. Collect static.
+  ```python
+  python manage.py collectstatic`
+  ```
+
+6. (Optional) Create a super user for admin panel.
+  ```python
+  python manage.py createsuperuser`
+  ```
+
+7. Run the server.
+  ```python
+  python manage.py runserver 0:8000`
+  ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
