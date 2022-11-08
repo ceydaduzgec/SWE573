@@ -114,6 +114,8 @@ celerybeat.pid
 # Environments
 *.env
 *.venv
+sole_project/env*
+sole_project/venv*
 env/*
 venv/*
 ENV/*
