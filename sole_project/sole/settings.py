@@ -119,7 +119,7 @@ DATABASES = {
         "NAME": env("DB_NAME", default="sole_db"),
         "USER": env("DB_USER", default="jay"),
         "PASSWORD": env("DB_PASSWORD", default="test"),
-        "HOST": env("DB_HOST", default="localhost"),
+        "HOST": env("DB_HOST", default="sole_db"),
         "PORT": env("DB_PORT", default="5432"),
     }
 }
