@@ -10,7 +10,7 @@ services:
     depends_on:
       - sole_db
     ports:
-      - "3500:3500"
+      - "8000:8000"
 
   sole_db:
     image: postgres:13.6

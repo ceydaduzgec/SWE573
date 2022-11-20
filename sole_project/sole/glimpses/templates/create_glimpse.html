@@ -8,7 +8,7 @@
       {% csrf_token %} <!--Security feature of Django to determine who sent the request -->
       {{form |crispy }}
       <button class="btn btn-primary" type="submit">Save</button>
-      <a href="{% url "posts:list" %}"><button class="btn btn-light" >Cancel</button>
+      <a href="{% url "glimpses:list" %}"><button class="btn btn-light" >Cancel</button>
     </form>
   </div>
 {% endblock content %}
