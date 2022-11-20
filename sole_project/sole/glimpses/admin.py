@@ -51,19 +51,31 @@ class GlimpsesAdmin(admin.ModelAdmin):
         ),
         (
             "Activities Information",
-            {
-                "fields": (
-                    "tags",
-                )
-            },
+            {"fields": ("tags",)},
         ),
     )
 
-    inlines = [LikeInlineAdmin, RatingInlineAdmin, CommentInlineAdmin,]
-    list_display = ("title", "creation_datetime", "glimpse_like_count",)
+    inlines = [
+        LikeInlineAdmin,
+        RatingInlineAdmin,
+        CommentInlineAdmin,
+    ]
+    list_display = (
+        "title",
+        "creation_datetime",
+        "glimpse_like_count",
+    )
     list_select_related = ("created_by",)
-    list_filter = ("tags", "creation_datetime", "created_by",)
-    readonly_fields = ("created_by", "creation_datetime", "glimpse_like_count",)
+    list_filter = (
+        "tags",
+        "creation_datetime",
+        "created_by",
+    )
+    readonly_fields = (
+        "created_by",
+        "creation_datetime",
+        "glimpse_like_count",
+    )
 
     def glimpse_like_count(self, obj):
         return obj.glimpse_count
