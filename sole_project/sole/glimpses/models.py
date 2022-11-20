@@ -64,7 +64,7 @@ class Glimpse(models.Model):
         PRIVATE = 'private', _('Private')
 
     title = models.CharField(_('Title'), max_length=255)
-    text = models.TextField(_("Text"), max_length=2000, blank=True)
+    text = models.TextField(_("Text"), max_length=2000, blank=True, null=False)
     url = models.URLField(_("URL"), max_length=255,blank=True)
     status = models.CharField(_("Status"), max_length=255, choices=Status.choices)
 

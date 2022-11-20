@@ -9,6 +9,7 @@ from django.views.generic.list import ListView
 
 from .forms import RatingForm
 from .models import Like, Glimpse, Rating, Tag
+from sole.core.constants import PAGINATION_NUMBER
 
 
 class OwnerRequiredMixin(LoginRequiredMixin):
@@ -25,7 +26,7 @@ class GlimpseListView(ListView):
     ordering = "-creation_datetime"
     context_object_name = "glimpses"
     template_name = "glimpse_list.html"
-    paginate_by = 5
+    paginate_by = PAGINATION_NUMBER
 
     def get_queryset(self):
         queryset = super().get_queryset()

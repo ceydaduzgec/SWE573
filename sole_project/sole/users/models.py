@@ -6,7 +6,7 @@ from django.urls import reverse
 class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
-    bio = models.TextField(null=True)
+    bio = models.TextField(blank=True, null=False)
 
     objects = UserManager()
 
