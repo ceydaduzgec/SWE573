@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from .models import Like, Glimpse, Rating, Tag, Comment
+from .models import Comment, Glimpse, Like, Rating, Tag
 
 admin.site.site_header = "Sole Admin"
 admin.site.index_title = "Welcome to Sole"
@@ -51,19 +51,31 @@ class GlimpsesAdmin(admin.ModelAdmin):
         ),
         (
             "Activities Information",
-            {
-                "fields": (
-                    "tags",
-                )
-            },
+            {"fields": ("tags",)},
         ),
     )
 
-    inlines = [LikeInlineAdmin, RatingInlineAdmin, CommentInlineAdmin,]
-    list_display = ("title", "creation_datetime", "glimpse_like_count",)
+    inlines = [
+        LikeInlineAdmin,
+        RatingInlineAdmin,
+        CommentInlineAdmin,
+    ]
+    list_display = (
+        "title",
+        "creation_datetime",
+        "glimpse_like_count",
+    )
     list_select_related = ("created_by",)
-    list_filter = ("tags", "creation_datetime", "created_by",)
-    readonly_fields = ("created_by", "creation_datetime", "glimpse_like_count",)
+    list_filter = (
+        "tags",
+        "creation_datetime",
+        "created_by",
+    )
+    readonly_fields = (
+        "created_by",
+        "creation_datetime",
+        "glimpse_like_count",
+    )
 
     def glimpse_like_count(self, obj):
         return obj.glimpse_count

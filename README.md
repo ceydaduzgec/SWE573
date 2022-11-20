@@ -139,7 +139,7 @@ To update versions of pre-commit hooks to the latest version automatically:
 ```
 pre-commit autoupdate
 ```
-
+#### WARNING: `.flake8` `.pre-commit-config.yaml` `config.toml` rules should be compatible with each other.
 
 <!-- ROADMAP -->
 ## Roadmap

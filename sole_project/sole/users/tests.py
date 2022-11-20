@@ -5,9 +5,7 @@ from django.test import TestCase
 class UserAccountTests(TestCase):
     def test_new_superuser(self):
         db = get_user_model()
-        super_user = db.objects.create_superuser(
-            "testuser@super.com", "username", "firstname", "password"
-        )
+        super_user = db.objects.create_superuser("testuser@super.com", "username", "firstname", "password")
         self.assertEqual(super_user.email, "testuser@super.com")
         self.assertEqual(super_user.user_name, "username")
         self.assertEqual(super_user.first_name, "firstname")
@@ -45,9 +43,7 @@ class UserAccountTests(TestCase):
 
     def test_new_user(self):
         db = get_user_model()
-        user = db.objects.create_user(
-            "testuser@user.com", "username", "firstname", "password"
-        )
+        user = db.objects.create_user("testuser@user.com", "username", "firstname", "password")
         self.assertEqual(user.email, "testuser@user.com")
         self.assertEqual(user.user_name, "username")
         self.assertEqual(user.first_name, "firstname")
@@ -56,6 +52,4 @@ class UserAccountTests(TestCase):
         self.assertFalse(user.is_active)
 
         with self.assertRaises(ValueError):
-            db.objects.create_user(
-                email="", user_name="a", first_name="first_name", password="password"
-            )
+            db.objects.create_user(email="", user_name="a", first_name="first_name", password="password")
