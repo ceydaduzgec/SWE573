@@ -7,9 +7,10 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from .forms import RatingForm
-from .models import Like, Glimpse, Rating
 from sole.core.constants import PAGINATION_NUMBER
+
+from .forms import RatingForm
+from .models import Glimpse, Like, Rating
 
 
 class OwnerRequiredMixin(LoginRequiredMixin):

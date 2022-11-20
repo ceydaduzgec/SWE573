@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from .models import Like, Glimpse, Rating, Tag, Comment
+from .models import Comment, Glimpse, Like, Rating, Tag
 
 admin.site.site_header = "Sole Admin"
 admin.site.index_title = "Welcome to Sole"

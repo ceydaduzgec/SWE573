@@ -3,9 +3,9 @@ from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Avg, Count
-from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 User = get_user_model()
 

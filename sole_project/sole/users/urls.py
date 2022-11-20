@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
+
 from sole.users.views import SignUpView, change_password
 
 app_name = "users"
