@@ -12,3 +12,4 @@ jobs:
       - run: pip install black flake8 isort
       - run: black . --config=sole_project/config.toml  --check
       - run: flake8 . --count --show-source --statistics --config=sole_project/.flake8
+      - run: isort . --profile black --check-only --skip migrations

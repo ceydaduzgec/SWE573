@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
 from sole.core.constants import PAGINATION_NUMBER
 
 from .forms import RatingForm
