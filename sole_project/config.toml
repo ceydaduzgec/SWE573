@@ -1,0 +1,17 @@
+[tool.isort]
+py_version=39
+profile = "black"
+line_length = 120
+skip_glob = [
+    "sole_project/__init__.py",
+    "sole_project/*/migrations/*",
+]
+
+[tool.black]
+line-length = 120
+target-version = ['py39']
+force-exclude = '''(
+   sole_project/__init__.py
+   | migrations/*
+)
+'''

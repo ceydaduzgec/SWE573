@@ -34,9 +34,7 @@ env = Env()
 env.read_env(env_file=".env")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib"
-)
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG", default=True)

@@ -10,6 +10,6 @@ jobs:
           python-version: 3.x
       - run: pip install --upgrade pip
       - run: pip install black flake8 isort
-      - run: black --check .
-      - run: flake8 . --count --show-source --statistics
-      - run: isort --profile black .
+      - run: black . --config=config.toml  --check
+      - run: flake8 . --count --show-source --statistics --config=.flake8
+      - run: isort . --profile black --check-only

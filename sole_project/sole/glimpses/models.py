@@ -42,9 +42,7 @@ class Rating(models.Model):
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
 
-    rating = models.IntegerField(
-        _("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]]
-    )
+    rating = models.IntegerField(_("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]])
 
     def __str__(self):
         return f"{self.rating}"
@@ -102,7 +100,5 @@ class Glimpse(models.Model):
 
     @property
     def average_rating(self):
-        avg_rating = self.ratings.aggregate(average_rating=Avg("rating"))[
-            "average_rating"
-        ]
+        avg_rating = self.ratings.aggregate(average_rating=Avg("rating"))["average_rating"]
         return avg_rating or "0"
