@@ -4,7 +4,7 @@ repos:
     rev: 5.0.4
     hooks:
     -   id: flake8
-        args: ['--ignore=E501,F403,F405,E126,E121,W503']
+        args: ['--ignore=E501,F403,F405,W503,E203']
         exclude: ^(env|venv)
 
 -   repo: https://github.com/pycqa/isort
@@ -17,3 +17,4 @@ repos:
     rev: 22.10.0
     hooks:
       - id: black
+        args: ["--line-length=120",]

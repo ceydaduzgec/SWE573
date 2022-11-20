@@ -5,6 +5,9 @@
 
 `pip install -r requirements.txt`
 
+## Pre-commit
+`git commit -m "Some comments" --no-verify`
+
 ## Run Project
 
 `source tools/run_development.sh`
