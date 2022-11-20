@@ -30,8 +30,10 @@ class GlimpseListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        if self.request.GET.get("drafts"):
+        if self.request.GET.get("status") == "draft":
             queryset = queryset.filter(status=Glimpse.Status.DRAFT)
+        elif self.request.GET.get("status") == "private":
+            queryset = queryset.filter(status=Glimpse.Status.PRIVATE)
         else:
             queryset = queryset.filter(status=Glimpse.Status.PUBLIC)
 
@@ -44,7 +46,6 @@ class GlimpseListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["tags"] = Tag.most_used_tags()
         context["rate_form"] = RatingForm()
         return context
 

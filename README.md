@@ -114,7 +114,7 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
 
 6. Run the server.
   ```python
-  python manage.py runserver 0:8000`
+  python manage.py runserver 0:8080`
   ```
 
 ### When you are done:

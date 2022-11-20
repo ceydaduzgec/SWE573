@@ -31,14 +31,14 @@ class Tag(models.Model):
 
 
 class Like(models.Model):
-    glimpse = models.ForeignKey("glimpses.Glimpse", related_name="likes", on_delete=models.CASCADE)
+    glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="likes", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.glimpse}"
 
 class Rating(models.Model):
-    glimpse = models.ForeignKey("glimpses.Glimpse", related_name="ratings", on_delete=models.CASCADE)
+    glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
 
     rating = models.IntegerField(_("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]])
@@ -48,7 +48,7 @@ class Rating(models.Model):
 
 
 class Comment(models.Model):
-    glimpse = models.ForeignKey("glimpses.Glimpse", related_name="comments", on_delete=models.CASCADE)
+    glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User,related_name="comments", on_delete=models.CASCADE)
 
     comment = models.IntegerField(_("Comment"))
@@ -73,7 +73,7 @@ class Glimpse(models.Model):
 
     tags = models.ManyToManyField(Tag, verbose_name=_('Tags'), blank=True)
     liked_by = models.ManyToManyField(User, related_name="liked_glimpses", through="glimpses.Like", verbose_name=_('Likes'))
-    ratings = models.ManyToManyField(User, related_name="ratingd_glimpses", through="glimpses.Rating", verbose_name=_('Ratings'))
+    ratings = models.ManyToManyField(User, related_name="rated_glimpses", through="glimpses.Rating", verbose_name=_('Ratings'))
     comments = models.ManyToManyField(User, related_name="commented_glimpses", through="glimpses.Comment", verbose_name=_('Comments'))
 
     def __str__(self):

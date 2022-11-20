@@ -1,5 +1,4 @@
-
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm" style="background-color: #ffc404;">
   <a class="navbar-brand ml-5" href="{% url 'glimpses:list' %}">sole</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
@@ -16,7 +15,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}">My Glimpses</a>
-            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}&drafts">My Drafts</a> 
+            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}&status=draft">My Drafts</a> 
             <a class="dropdown-item"href="{% url "users:change_password" %}">Change password</a> 
             <a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a>
           </div>

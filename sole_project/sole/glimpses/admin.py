@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from .models import Like, Glimpse, Rating, Tag
+from .models import Like, Glimpse, Rating, Tag, Comment
 
-admin.site.site_header = "sole Admin"
-admin.site.index_title = "Welcome to sole"
+admin.site.site_header = "Sole Admin"
+admin.site.index_title = "Welcome to Sole"
 
 
 class GlimpseInlineAdmin(admin.TabularInline):
@@ -18,6 +18,18 @@ class GlimpseInlineAdmin(admin.TabularInline):
 
     def has_change_permission(self, *args, **kwargs):
         return False
+
+
+class LikeInlineAdmin(admin.TabularInline):
+    model = Like
+
+
+class RatingInlineAdmin(admin.TabularInline):
+    model = Rating
+
+
+class CommentInlineAdmin(admin.TabularInline):
+    model = Comment
 
 
 @admin.register(Glimpse)
@@ -42,14 +54,12 @@ class GlimpsesAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "tags",
-                    "liked_by",
-                    "rating",
-                    "comments"
                 )
             },
         ),
     )
 
+    inlines = [LikeInlineAdmin, RatingInlineAdmin, CommentInlineAdmin,]
     list_display = ("title", "creation_datetime", "glimpse_like_count",)
     list_select_related = ("created_by",)
     list_filter = ("tags", "creation_datetime", "created_by",)
