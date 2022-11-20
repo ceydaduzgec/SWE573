@@ -5,9 +5,9 @@ from django.urls import reverse
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
-    bio = models.TextField(blank=True, null=False)
+    username = models.CharField(_("Username"), max_length=150, unique=True)
+    email = models.EmailField(_("Email"), unique=True)
+    bio = models.TextField(_("Bio"), blank=True, null=False)
 
     objects = UserManager()
 

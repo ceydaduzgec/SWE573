@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from .forms import RatingForm
-from .models import Like, Glimpse, Rating, Tag
+from .models import Like, Glimpse, Rating
 from sole.core.constants import PAGINATION_NUMBER
 
 
