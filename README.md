@@ -73,7 +73,8 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
 ### Built With
 
 * [![Django][Django-image]][Django-url]
-* [![React][React.js]][React-url]
+* [![Bootstrap][Bootstrap-image]][Bootstrap-url]
+* [![Postgresql][Postgresql-image]][Postgresql-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -106,20 +107,20 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
   python manage.py migrate
   ```
 
-5. Collect static.
-  ```python
-  python manage.py collectstatic`
-  ```
-
-6. (Optional) Create a super user for admin panel.
+5. (Optional) Create a super user for admin panel.
   ```python
   python manage.py createsuperuser`
   ```
 
-7. Run the server.
+6. Run the server.
   ```python
-  python manage.py runserver 0:8000`
+  python manage.py runserver 0:8080`
   ```
+
+### When you are done:
+
+- `docker-compose -f docker-compose.yml -f docker-compose.yml down` (Optional)
+- `docker system prune` (Optional, frees storage by removing **all** unused images, containers etc. **on the host**, use with care!)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -143,7 +144,7 @@ pre-commit autoupdate
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Milestone 1
+- [x] Milestone 1
 - [ ] Milestone 2
 - [ ] Milestone 3
 
@@ -216,21 +217,10 @@ Project Link: [https://github.com/ceydaduzgec/SWE573](https://github.com/ceydadu
 [product-screenshot]: images/screenshot.png
 
 [Django-image]: https://img.shields.io/badge/Django-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[Django-url]: https://nextjs.org/
+[Django-url]: https://www.djangoproject.com/
 
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-image]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+
+[Postgresql-image]: https://img.shields.io/badge/Postgresql-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[Postgresql-url]: https://www.postgresql.org/

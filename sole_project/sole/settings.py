@@ -43,6 +43,7 @@ DEBUG = env("DJANGO_DEBUG", default=True)
 # CHANGE THIS AFTER DONE
 
 ALLOWED_HOSTS = [
+    "0.0.0.0",
     "127.0.0.1",
     "localhost",
 ]
@@ -64,7 +65,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     # Local Apps
     "sole.core",
-    "sole.posts",
+    "sole.glimpses",
 ]
 
 if DEBUG:
@@ -181,8 +182,8 @@ MEDIA_URL = "/media/"
 # Auth views
 
 LOGIN_URL = "users:login"
-LOGIN_REDIRECT_URL = "posts:list"
-LOGOUT_REDIRECT_URL = "posts:list"
+LOGIN_REDIRECT_URL = "glimpses:list"
+LOGOUT_REDIRECT_URL = "glimpses:list"
 
 
 # Crispy Forms

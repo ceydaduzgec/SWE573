@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PostsConfig(AppConfig):
+class GlimpsesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "sole.posts"
+    name = "sole.glimpses"

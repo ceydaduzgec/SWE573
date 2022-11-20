@@ -1,16 +1,15 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-
+from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 class User(AbstractUser):
-    """
-    username = models.CharField(max_length=150)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
-    is_staff = models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateTimeField()
-    """
-
+    username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
-    bio = models.TextField(null=True)
+    bio = models.TextField(blank=True, null=False)
+
+    objects = UserManager()
+
+    def get_absolute_url(self):
+        # TODO: filter by username
+        return reverse("glimpses:list", args=[self.username])

@@ -1,11 +1,10 @@
-
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand ml-5" href="{% url 'posts:list' %}">sole</a>
+<nav class="navbar navbar-expand-sm" style="background-color: #ffc404;">
+  <a class="navbar-brand ml-5" href="{% url 'glimpses:list' %}">sole</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <a class="navbar-brand ml-3" href="{% url 'posts:create' %}">Share a Photo</a>
+  <a class="navbar-brand ml-3" href="{% url 'glimpses:create' %}">Share a Glimpse</a>
 
   <div class="collapse navbar-collapse mr-5" id="navbarNav">
     {% if user.is_authenticated %}
@@ -15,7 +14,8 @@
             {{ user.username }}
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item"href="{% url "posts:list" %}?username={{user.username}}">My posts</a> 
+            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}">My Glimpses</a>
+            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}&status=draft">My Drafts</a> 
             <a class="dropdown-item"href="{% url "users:change_password" %}">Change password</a> 
             <a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a>
           </div>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <form enctype="multipart/form-data" method="POST" class="uni_form">
+      {% csrf_token %} <!--Security feature of Django to determine who sent the request -->
+      {{form |crispy }}
+      <button class="btn btn-primary" type="submit">Save</button>
+      <button class="btn btn-danger" type="submit" formaction="/delete/{{glimpse.id}}/">Delete</button>
+      <a href="{% url "glimpses:list" %}"><button class="btn btn-light" type="submit">Cancel</button>
+    </form>
+  </div>
+{% endblock content %}
