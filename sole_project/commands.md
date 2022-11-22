@@ -15,6 +15,19 @@
 `source tools/exec_bash.sh`
 
 ## Docker
+
+`docker ps -a` - see cmd
+
+`docker images` - show images
+
+`ls -a`- show all files inside the docker
+
+`bg` - see background processes inside the docker
+
+`docker exec -it <docker-name>` - run docker
+
+`docker exec -it <docker-name> bash` - go into docker bash
+
 `docker build --tag <project_name> .` - build and name the image
 
 `docker run --publish 8000:8000 <project_name>` - run the image by the name
