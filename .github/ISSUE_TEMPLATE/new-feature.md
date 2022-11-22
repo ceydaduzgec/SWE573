@@ -1,9 +1,10 @@
 ---
-name: Pull request
-about: Create issue for pull request.
-title: "[PULLREQUEST]"
-labels: project management
+name: New Feature
+about: Create issue for new feature.
 assignees: ceydaduzgec
+labels: [
+  "Type: New Feature"
+]
 
 ---
 
