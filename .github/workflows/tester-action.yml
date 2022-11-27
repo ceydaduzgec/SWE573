@@ -26,17 +26,17 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: psycopg2 prerequisites
-      run: sudo apt-get install python-dev libpq-dev
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r sole_project/requirements.txt
-    - name: Run Tests
-      run: |
-        python sole_project/manage.py test
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: psycopg2 prerequisites
+        run: sudo apt-get install python libpq-dev
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r sole_project/requirements.txt
+      - name: Run Tests
+        run: |
+          python sole_project/manage.py test
