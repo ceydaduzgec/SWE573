@@ -20,6 +20,7 @@ dj-inmemorystorage==2.1.0
 ipython==8.4.0
 argon2-cffi==21.3.0
 django-rich==1.4.0
+factory-boy==3.2.1
 
 coverage
 ipdb

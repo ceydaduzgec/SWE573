@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from sole.users.factory import UserFactory
 
 
 class UserAccountTests(TestCase):
@@ -15,7 +16,7 @@ class UserAccountTests(TestCase):
         self.assertEqual(str(super_user), "username")
 
         with self.assertRaises(ValueError):
-            db.objects.create_superuser(
+            UserFactory(
                 email="testuser@super.com",
                 user_name="username1",
                 first_name="first_name",
@@ -24,7 +25,7 @@ class UserAccountTests(TestCase):
             )
 
         with self.assertRaises(ValueError):
-            db.objects.create_superuser(
+            UserFactory(
                 email="testuser@super.com",
                 user_name="username1",
                 first_name="first_name",
@@ -33,7 +34,7 @@ class UserAccountTests(TestCase):
             )
 
         with self.assertRaises(ValueError):
-            db.objects.create_superuser(
+            UserFactory(
                 email="",
                 user_name="username1",
                 first_name="first_name",
