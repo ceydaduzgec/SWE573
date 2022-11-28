@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from sole.users.factory import UserFactory
 
@@ -8,6 +9,7 @@ class UserAccountTests(TestCase):
             email="testuser@super.com",
             username="johnnyjoe",
             first_name="Joe",
+            password="aad3fa",
             is_superuser=True,
             is_staff=True,
         )
@@ -24,6 +26,7 @@ class UserAccountTests(TestCase):
             email="testuser@user.com",
             username="username",
             first_name="firstname",
+            password="aad3fa",
             is_active=False,
         )
         self.assertEqual(user.email, "testuser@user.com")
@@ -33,11 +36,79 @@ class UserAccountTests(TestCase):
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_active)
 
-    def test_empty_fields(self):  # TODO: correct required field
+    def test_empty_fields(self):
+        with self.assertRaisesMessage(ValidationError, "'password': ['This field cannot be blank.']"):
+            UserFactory(
+                email="testuser@user.com",
+                username="username1",
+                first_name="first_name",
+                password="",
+            )
+        with self.assertRaisesMessage(ValidationError, "'email': ['This field cannot be blank.']"):
+            UserFactory(
+                email="",
+                username="username1",
+                first_name="first_name",
+                password="asdas12312",
+            )
+        with self.assertRaisesMessage(ValidationError, "'username': ['This field cannot be blank.']"):
+            UserFactory(
+                email="testuser@user.com",
+                username="",
+                first_name="first_name",
+                password="asdas12312",
+            )
+
+    def test_username_regex(self):
+        with self.assertRaisesMessage(
+            ValidationError,
+            "'username': ['Username is invalid. Only lowercase English letters, period and underscore characters are allowed. Minimum length is three characters.']",
+        ):
+            UserFactory(
+                email="testuser@user.com",
+                username="ASDSA",
+                first_name="first_name",
+                password="asdas12312",
+            )
+        with self.assertRaisesMessage(
+            ValidationError,
+            "'username': ['Username is invalid. Only lowercase English letters, period and underscore characters are allowed. Minimum length is three characters.']",
+        ):
+            UserFactory(
+                email="testuser@user.com",
+                username="ae",
+                first_name="first_name",
+                password="asdas12312",
+            )
+        with self.assertRaisesMessage(
+            ValidationError,
+            "'username': ['Username is invalid. Only lowercase English letters, period and underscore characters are allowed. Minimum length is three characters.']",
+        ):
+            UserFactory(
+                email="testuser@user.com",
+                username="ae",
+                first_name="first_name",
+                password="asdas12312",
+            )
+
+    def test_unique_fields(self):
         UserFactory(
-            email="",
+            email="testuser@user.com",
             username="username1",
             first_name="first_name",
-            password="password",
-            is_superuser=True,
+            password="asdasf",
         )
+        with self.assertRaisesMessage(ValidationError, "'email': ['User with this Email already exists.']"):
+            UserFactory(
+                email="testuser@user.com",
+                username="josy",
+                first_name="Josh",
+                password="asdsad",
+            )
+        with self.assertRaisesMessage(ValidationError, "'username': ['User with this Username already exists.']"):
+            UserFactory(
+                email="tesfs@user.com",
+                username="username1",
+                first_name="Josh",
+                password="asdsad",
+            )
