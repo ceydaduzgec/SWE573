@@ -13,7 +13,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version:
-          - "3.11"
+          - 3.x
     services:
       postgres:
         image: postgres:13.6

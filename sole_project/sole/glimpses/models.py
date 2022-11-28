@@ -11,7 +11,16 @@ User = get_user_model()
 
 
 class Tag(models.Model):
-    name = models.CharField(_("Name"), max_length=20, unique=True)
+    id = models.BigIntegerField(primary_key=True, editable=False)
+    creation_datetime = models.DateTimeField(auto_now_add=True, editable=False)
+    update_datetime = models.DateTimeField(auto_now=True)
+
+    name = models.CharField(_("Name"), max_length=255)
+    slug = models.SlugField(_("Slug"), max_length=255, allow_unicode=True)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
 
     def __str__(self):
         return self.name
@@ -22,12 +31,12 @@ class Tag(models.Model):
     @staticmethod
     def most_used_tags():
         yesterday = timezone.now() - timedelta(days=1)
-        Tags = (
+        tags = (
             Tag.objects.filter(glimpse__creation_datetime__gte=yesterday)
             .annotate(count=Count("glimpse__id"))
             .order_by("-count")[:5]
         )
-        return Tags
+        return tags
 
 
 class Like(models.Model):
@@ -41,7 +50,6 @@ class Like(models.Model):
 class Rating(models.Model):
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
-
     rating = models.IntegerField(_("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]])
 
     def __str__(self):
@@ -51,11 +59,10 @@ class Rating(models.Model):
 class Comment(models.Model):
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
-
-    comment = models.IntegerField(_("Comment"))
+    comment = models.TextField(_("Comment"), max_length=2000, blank=True, null=False)
 
     def __str__(self):
-        return f"{self.rating}"
+        return f"{self.comment}"
 
 
 class Glimpse(models.Model):

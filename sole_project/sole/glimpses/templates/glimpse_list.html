@@ -12,10 +12,12 @@
           <p class="card-text">{{ glimpse.title }}</p>
           <p class="card-text">{{ glimpse.url }}</p>
           <p class="card-text">{{ glimpse.text }}</p>
+
           {% for tag in glimpse.tags.all %}
             <a href="{% url "glimpses:list" %}?tag={{tag.name}}">#{{ tag.name }}</a>
           {% endfor %}
 
+          <p class="card-text">{{ glimpse.liked_by.count }}</p>
 
           <div>
             {% if user.is_authenticated %}
