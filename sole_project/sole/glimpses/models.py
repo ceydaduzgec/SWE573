@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Avg, Count
@@ -7,14 +8,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from autoslug import AutoSlugField
-
-
 User = get_user_model()
+
 
 class Category(models.Model):
     name = models.CharField(_("Name"), max_length=20, unique=True)
-    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from='name')
+    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
 
     def __str__(self):
         return self.name
@@ -22,10 +21,11 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("category", args=[self.slug])
 
+
 class Tag(models.Model):
     id = models.BigIntegerField(primary_key=True, editable=False)
     name = models.CharField(_("Name"), max_length=255)
-    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from='name')
+    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
 
     class Meta:
         verbose_name = _("Tag")
