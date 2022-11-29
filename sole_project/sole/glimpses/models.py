@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Avg, Count
@@ -10,13 +11,21 @@ from django.utils.translation import ugettext_lazy as _
 User = get_user_model()
 
 
+class Category(models.Model):
+    name = models.CharField(_("Name"), max_length=20, unique=True)
+    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("category", args=[self.slug])
+
+
 class Tag(models.Model):
     id = models.BigIntegerField(primary_key=True, editable=False)
-    creation_datetime = models.DateTimeField(auto_now_add=True, editable=False)
-    update_datetime = models.DateTimeField(auto_now=True)
-
     name = models.CharField(_("Name"), max_length=255)
-    slug = models.SlugField(_("Slug"), max_length=255, allow_unicode=True)
+    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
 
     class Meta:
         verbose_name = _("Tag")
@@ -76,8 +85,9 @@ class Glimpse(models.Model):
     url = models.URLField(_("URL"), max_length=255, blank=True)
     status = models.CharField(_("Status"), max_length=255, choices=Status.choices)
 
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     creation_datetime = models.DateTimeField(_("Created on"), auto_now_add=True)
+    update_datetime = models.DateTimeField(_("Updated on"), auto_now=True)
 
     tags = models.ManyToManyField(Tag, verbose_name=_("Tags"), blank=True)
     liked_by = models.ManyToManyField(
@@ -100,7 +110,7 @@ class Glimpse(models.Model):
     )
 
     def __str__(self):
-        return f"{self.created_by} - {self.creation_datetime}"
+        return f"{self.author} - {self.creation_datetime}"
 
     def get_absolute_url(self):
         return reverse("glimpses:update", args=[self.id])
