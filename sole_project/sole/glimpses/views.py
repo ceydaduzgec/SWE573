@@ -15,7 +15,7 @@ from sole.core.constants import PAGINATION_NUMBER
 class OwnerRequiredMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         glimpse = get_object_or_404(Glimpse, pk=self.kwargs.get("glimpse_id"))
-        if glimpse.created_by != request.user:
+        if glimpse.author != request.user:
             messages.error(request, "You are not the owner of this glimpse!")
             return redirect("users:login")
         return super().dispatch(request, *args, **kwargs)
@@ -39,7 +39,7 @@ class GlimpseListView(ListView):
             queryset = queryset.filter(status=Glimpse.Status.PUBLIC)
 
         if username := self.request.GET.get("username"):
-            queryset = queryset.filter(created_by__username=username)
+            queryset = queryset.filter(author__username=username)
         if tag := self.request.GET.get("tag"):
             queryset = queryset.filter(tags__name=tag)
 
@@ -60,7 +60,7 @@ class GlimpseCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     pk_url_kwarg = "glimpse_id"
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 
