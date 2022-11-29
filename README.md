@@ -102,13 +102,13 @@ python manage.py migrate
 5. (Optional) Create a super user for admin panel.
 
 ```python
-python manage.py createsuperuser`
+python manage.py createsuperuser
 ```
 
 6. Run the server.
 
 ```python
-python manage.py runserver 0:8080`
+python manage.py runserver 0:8080
 ```
 
 To run all the tests:
