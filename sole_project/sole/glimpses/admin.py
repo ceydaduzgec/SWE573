@@ -44,7 +44,7 @@ class GlimpsesAdmin(admin.ModelAdmin):
                     "url",
                     "text",
                     "status",
-                    "created_by",
+                    "author",
                     "creation_datetime",
                 )
             },
@@ -65,14 +65,14 @@ class GlimpsesAdmin(admin.ModelAdmin):
         "creation_datetime",
         "glimpse_like_count",
     )
-    list_select_related = ("created_by",)
+    list_select_related = ("author",)
     list_filter = (
         "tags",
         "creation_datetime",
-        "created_by",
+        "author",
     )
     readonly_fields = (
-        "created_by",
+        "author",
         "creation_datetime",
         "glimpse_like_count",
     )
