@@ -3,7 +3,7 @@ from datetime import timedelta
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import Avg, Count
+from django.db.models import Count
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -56,15 +56,6 @@ class Like(models.Model):
         return f"{self.glimpse}"
 
 
-class Rating(models.Model):
-    glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
-    rating = models.IntegerField(_("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]])
-
-    def __str__(self):
-        return f"{self.rating}"
-
-
 class Comment(models.Model):
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
@@ -96,12 +87,6 @@ class Glimpse(models.Model):
         through="glimpses.Like",
         verbose_name=_("Likes"),
     )
-    ratings = models.ManyToManyField(
-        User,
-        related_name="rated_glimpses",
-        through="glimpses.Rating",
-        verbose_name=_("Ratings"),
-    )
     comments = models.ManyToManyField(
         User,
         related_name="commented_glimpses",
@@ -114,8 +99,3 @@ class Glimpse(models.Model):
 
     def get_absolute_url(self):
         return reverse("glimpses:update", args=[self.id])
-
-    @property
-    def average_rating(self):
-        avg_rating = self.ratings.aggregate(average_rating=Avg("rating"))["average_rating"]
-        return avg_rating or "0"

@@ -26,7 +26,6 @@ class User(AbstractUser):
     objects = UserManager()
 
     def get_absolute_url(self):
-        # TODO: filter by username
         return reverse("glimpses:list", args=[self.username])
 
     def save(self, *args, **kwargs):
