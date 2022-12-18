@@ -25,6 +25,10 @@
 
 `docker-compose up`
 
+`docker kill $(docker ps -q)`
+
+`sudo apachectl stop`
+
 ## Postgresql
 `psql -d <db_name> - enter postgresql command line
 

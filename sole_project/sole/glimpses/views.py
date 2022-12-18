@@ -8,8 +8,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from sole.core.constants import PAGINATION_NUMBER
 
-from .forms import RatingForm
-from .models import Glimpse, Like, Rating
+from .models import Glimpse, Like
 
 
 class OwnerRequiredMixin(LoginRequiredMixin):
@@ -47,14 +46,13 @@ class GlimpseListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["rate_form"] = RatingForm()
         return context
 
 
 class GlimpseCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Glimpse
     template_name = "create_glimpse.html"
-    fields = ["url", "title", "text", "tags", "status"]
+    fields = ["url", "title", "description", "tags", "status"]
     success_message = "Glimpse was created successfully"
     success_url = reverse_lazy("glimpses:list")
     pk_url_kwarg = "glimpse_id"
@@ -68,7 +66,7 @@ class GlimpseUpdateView(SuccessMessageMixin, OwnerRequiredMixin, UpdateView):
     model = Glimpse
     context_object_name = "glimpse"
     template_name = "update_glimpse.html"
-    fields = ["url", "title", "text", "tags", "status"]
+    fields = ["url", "title", "description", "tags", "status"]
     success_message = "Glimpse was updated successfully"
     success_url = reverse_lazy("glimpses:list")
     pk_url_kwarg = "glimpse_id"
@@ -97,16 +95,3 @@ def like(request, glimpse_id, *args, **kwargs):
     else:
         # need a warning here
         return redirect("glimpses:list")
-
-
-@login_required()
-def rate(request, glimpse_id, *args, **kwargs):
-    if request.method == "POST":
-        form = RatingForm(request.POST)
-        if form.is_valid():
-            rate, _ = Rating.objects.update_or_create(
-                glimpse__id=glimpse_id,
-                user=request.user,
-                defaults={"rating": form.instance.rating},
-            )
-            return redirect("glimpses:list")

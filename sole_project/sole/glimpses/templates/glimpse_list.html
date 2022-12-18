@@ -7,15 +7,17 @@
 
     {% for glimpse in glimpses %}
       <div class="card mb-3">
-        <div class="card-body"> 
+        <div class="card-body">
           <h2 class="card-title"><a href="{% url "glimpses:list" %}?username={{glimpse.author.username}}">{{glimpse.author.username}}</a></h2>
           <p class="card-text">{{ glimpse.title }}</p>
           <p class="card-text">{{ glimpse.url }}</p>
           <p class="card-text">{{ glimpse.text }}</p>
+
           {% for tag in glimpse.tags.all %}
             <a href="{% url "glimpses:list" %}?tag={{tag.name}}">#{{ tag.name }}</a>
           {% endfor %}
 
+          <p class="card-text">{{ glimpse.liked_by.count }}</p>
 
           <div>
             {% if user.is_authenticated %}
@@ -33,18 +35,12 @@
                   {% endif %}
                 </form>
 
-                <form method="POST" action="{% url "glimpses:rate" glimpse.id %}" class="uni_form" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  {{rate_form |crispy }}
-                <button class="btn btn-primary" type="submit">Rating ({{glimpse.average_rate}})</button>
-                </form>
-
                 <div class="col text-center"><br>
-                  
+
               </div>
 
               {% endif %}
-              
+
             {% endif %}
 
           </div>

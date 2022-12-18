@@ -3,23 +3,12 @@ from datetime import timedelta
 from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import Avg, Count
+from django.db.models import Count
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 User = get_user_model()
-
-
-class Category(models.Model):
-    name = models.CharField(_("Name"), max_length=20, unique=True)
-    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("category", args=[self.slug])
 
 
 class Tag(models.Model):
@@ -40,15 +29,16 @@ class Tag(models.Model):
     @staticmethod
     def most_used_tags():
         yesterday = timezone.now() - timedelta(days=1)
-        Tags = (
+        tags = (
             Tag.objects.filter(glimpse__creation_datetime__gte=yesterday)
             .annotate(count=Count("glimpse__id"))
             .order_by("-count")[:5]
         )
-        return Tags
+        return tags
 
 
 class Like(models.Model):
+    id = models.BigIntegerField(primary_key=True, editable=False)
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="likes", on_delete=models.CASCADE)
 
@@ -56,24 +46,27 @@ class Like(models.Model):
         return f"{self.glimpse}"
 
 
-class Rating(models.Model):
-    glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
-
-    rating = models.IntegerField(_("Rating"), default=1, choices=[(i, i) for i in [1, 2, 3, 4, 5]])
-
-    def __str__(self):
-        return f"{self.rating}"
-
-
 class Comment(models.Model):
+    id = models.BigIntegerField(primary_key=True, editable=False)
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
-
-    comment = models.IntegerField(_("Comment"))
+    comment = models.TextField(_("Comment"), max_length=2000, blank=True, null=False)
 
     def __str__(self):
-        return f"{self.rating}"
+        return f"{self.comment}"
+
+
+class Space(models.Model):
+    id = models.BigIntegerField(primary_key=True, editable=False)
+    title = models.CharField(_("Title on"), max_length=255, unique=False)
+    description = models.CharField(_("Description"), max_length=255, blank=True, unique=False)
+    creation_datetime = models.DateTimeField(_("Created on"), auto_now_add=True)
+    update_datetime = models.DateTimeField(_("Updated on"), auto_now=True)
+    owner = models.ForeignKey(User, related_name="owner", on_delete=models.CASCADE, verbose_name=_("Owner"))
+    members = models.ManyToManyField(User, related_name="members", verbose_name=_("Members"))
+
+    def __str__(self):
+        return self.title
 
 
 class Glimpse(models.Model):
@@ -82,33 +75,31 @@ class Glimpse(models.Model):
         PUBLIC = "public", _("Public")
         PRIVATE = "private", _("Private")
 
-    title = models.CharField(_("Title"), max_length=255)
-    text = models.TextField(_("Text"), max_length=2000, blank=True, null=False)
+    class Category(models.TextChoices):
+        VIDEO = "video", _("Video")
+        AUDIO = "audio", _("Audio")
+        IMAGE = "image", _("Image")
+        EVENT = "event", _("Event")
+        PLACE = "place", _("Place")
+        APP = "app", _("Application")
+
+    id = models.BigIntegerField(primary_key=True, editable=False)
+    title = models.CharField(_("Title"), max_length=50)
+    description = models.TextField(_("Description"), max_length=255, blank=True, null=False)
     url = models.URLField(_("URL"), max_length=255, blank=True)
     status = models.CharField(_("Status"), max_length=255, choices=Status.choices)
+    category = models.CharField(_("Category"), max_length=255, choices=Category.choices)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Author"))
     creation_datetime = models.DateTimeField(_("Created on"), auto_now_add=True)
     update_datetime = models.DateTimeField(_("Updated on"), auto_now=True)
 
     tags = models.ManyToManyField(Tag, verbose_name=_("Tags"), blank=True)
     liked_by = models.ManyToManyField(
-        User,
-        related_name="liked_glimpses",
-        through="glimpses.Like",
-        verbose_name=_("Likes"),
-    )
-    ratings = models.ManyToManyField(
-        User,
-        related_name="rated_glimpses",
-        through="glimpses.Rating",
-        verbose_name=_("Ratings"),
+        User, related_name="liked_glimpses", through="glimpses.Like", verbose_name=_("Likes")
     )
     comments = models.ManyToManyField(
-        User,
-        related_name="commented_glimpses",
-        through="glimpses.Comment",
-        verbose_name=_("Comments"),
+        User, related_name="commented_glimpses", through="glimpses.Comment", verbose_name=_("Comments")
     )
 
     def __str__(self):
@@ -116,8 +107,3 @@ class Glimpse(models.Model):
 
     def get_absolute_url(self):
         return reverse("glimpses:update", args=[self.id])
-
-    @property
-    def average_rating(self):
-        avg_rating = self.ratings.aggregate(average_rating=Avg("rating"))["average_rating"]
-        return avg_rating or "0"

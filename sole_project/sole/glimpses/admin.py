@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 
-from .models import Comment, Glimpse, Like, Rating, Tag
+from .models import Comment, Glimpse, Like, Tag
 
 admin.site.site_header = "Sole Admin"
 admin.site.index_title = "Welcome to Sole"
@@ -24,10 +24,6 @@ class LikeInlineAdmin(admin.TabularInline):
     model = Like
 
 
-class RatingInlineAdmin(admin.TabularInline):
-    model = Rating
-
-
 class CommentInlineAdmin(admin.TabularInline):
     model = Comment
 
@@ -42,7 +38,7 @@ class GlimpsesAdmin(admin.ModelAdmin):
                 "fields": (
                     "title",
                     "url",
-                    "text",
+                    "description",
                     "status",
                     "author",
                     "creation_datetime",
@@ -57,7 +53,6 @@ class GlimpsesAdmin(admin.ModelAdmin):
 
     inlines = [
         LikeInlineAdmin,
-        RatingInlineAdmin,
         CommentInlineAdmin,
     ]
     list_display = (
@@ -88,4 +83,3 @@ class GlimpsesAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag)
 admin.site.register(Like)
-admin.site.register(Rating)
