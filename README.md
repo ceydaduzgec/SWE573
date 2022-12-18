@@ -1,4 +1,3 @@
-
 <div id="top"></div>
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -7,8 +6,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -32,8 +29,6 @@
     <a href="https://github.com/ceydaduzgec/SWE573/issues/new">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -60,33 +55,29 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
+
 This projects is for the SWE 573 Software Development Practice course of Boğaziçi University on Fall'22 and supervised by [Suzan Uskudarlı](https://github.com/uskudarli). It will be updated each week in order to reflect projects process which is divided into 3 Milestones. You can find out more about it on the [wiki](https://github.com/ceydaduzgec/SWE573/wiki).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-* [![Django][Django-image]][Django-url]
-* [![Bootstrap][Bootstrap-image]][Bootstrap-url]
-* [![Postgresql][Postgresql-image]][Postgresql-url]
+- [![Django][django-image]][django-url]
+- [![Bootstrap][bootstrap-image]][bootstrap-url]
+- [![Postgresql][postgresql-image]][postgresql-url]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 ### Prerequisites
 
-* Download Docker from [here](https://www.docker.com/products/docker-desktop/)
-
+- Download Docker from [here](https://www.docker.com/products/docker-desktop/)
 
 ### Installation
 
@@ -98,24 +89,33 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
    ```sh
    cd sole_project
    ```
-3. Run Docker infastructure. 
+3. Run Docker infastructure.
    ```sh
    source tools/run_development.sh
    ```
 4. Migrate the database.
-  ```python
-  python manage.py migrate
-  ```
+
+```python
+python manage.py migrate
+```
 
 5. (Optional) Create a super user for admin panel.
-  ```python
-  python manage.py createsuperuser`
-  ```
+
+```python
+python manage.py createsuperuser
+```
 
 6. Run the server.
-  ```python
-  python manage.py runserver 0:8080`
-  ```
+
+```python
+python manage.py runserver 0:8080
+```
+
+To run all the tests:
+
+```python
+python manage.py test
+```
 
 ### When you are done:
 
@@ -125,23 +125,30 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Linting
+
 Each commit must be linted. Pre-commit is currently configured for flake8, isort and black. So, please install the pre-commit linter hook by running the following command from the terminal you use `git`:
 
 ```
 pip install pre-commit
 pre-commit install
 ```
+
 To manually run all pre-commit hooks on a repository:
+
 ```
 pre-commit run --all-files
 ```
+
 To update versions of pre-commit hooks to the latest version automatically:
+
 ```
 pre-commit autoupdate
 ```
+
 #### WARNING: `.flake8` `.pre-commit-config.yaml` `config.toml` rules should be compatible with each other.
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Milestone 1
@@ -152,9 +159,8 @@ See the [open issues](https://github.com/ceydaduzgec/SWE573/issues) for a full l
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "Type: Enhancement".
@@ -168,18 +174,16 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Ceyda Düzgeç - cduzgec@gmail.com
@@ -188,19 +192,17 @@ Project Link: [https://github.com/ceydaduzgec/SWE573](https://github.com/ceydadu
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* [Suzan Uskudarlı](https://github.com/uskudarli)
+- [Suzan Uskudarlı](https://github.com/uskudarli)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/ceydaduzgec/SWE573.svg?style=for-the-badge
 [contributors-url]: https://github.com/ceydaduzgec/SWE573/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ceydaduzgec/SWE573.svg?style=for-the-badge
@@ -211,16 +213,12 @@ Project Link: [https://github.com/ceydaduzgec/SWE573](https://github.com/ceydadu
 [issues-url]: https://github.com/ceydaduzgec/SWE573/issues
 [license-shield]: https://img.shields.io/github/license/ceydaduzgec/SWE573.svg?style=for-the-badge
 [license-url]: https://github.com/ceydaduzgec/SWE573/LICENSE.txt
-
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/ceydaduzgec/
 [product-screenshot]: images/screenshot.png
-
-[Django-image]: https://img.shields.io/badge/Django-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[Django-url]: https://www.djangoproject.com/
-
-[Bootstrap-image]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-
-[Postgresql-image]: https://img.shields.io/badge/Postgresql-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[Postgresql-url]: https://www.postgresql.org/
+[django-image]: https://img.shields.io/badge/Django-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[django-url]: https://www.djangoproject.com/
+[bootstrap-image]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[bootstrap-url]: https://getbootstrap.com
+[postgresql-image]: https://img.shields.io/badge/Postgresql-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[postgresql-url]: https://www.postgresql.org/
