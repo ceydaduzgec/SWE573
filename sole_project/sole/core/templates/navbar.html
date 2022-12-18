@@ -1,32 +1,29 @@
-<nav class="navbar navbar-expand-sm" style="background-color: #ffc404;">
+<nav class="navbar navbar-expand-sm" style="background-color: #ffc404">
   <a class="navbar-brand ml-5" href="{% url 'glimpses:list' %}">sole</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <a class="navbar-brand ml-3" href="{% url 'glimpses:create' %}">Share a Glimpse</a>
+  <a class="navbar-brand ml-3" href="{% url 'glimpses:create' %}"
+    >Share a Glimpse</a
+  >
 
   <div class="collapse navbar-collapse mr-5" id="navbarNav">
     {% if user.is_authenticated %}
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown">
-            {{ user.username }}
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}">My Glimpses</a>
-            <a class="dropdown-item"href="{% url "glimpses:list" %}?username={{user.username}}&status=draft">My Drafts</a> 
-            <a class="dropdown-item"href="{% url "users:change_password" %}">Change password</a> 
-            <a class="dropdown-item" href="{% url 'users:logout' %}">Log out</a>
-          </div>
-        </li>
-      </ul>
+    <a class="navbar-nav ml-auto" data-toggle="dropdown"href="{% url "users:profile" %}"">
+      {{ user.username }}
+    </a>
 
     {% else %}
-      <form class="form-inline ml-auto">
-        <a href="{% url 'users:login' %}" class="btn btn-outline-light">Log in</a>
-        <a href="{% url 'users:signup' %}" class="btn btn-light ml-2">Sign up</a>
-      </form>
+    <form class="form-inline ml-auto">
+      <a href="{% url 'users:login' %}" class="btn btn-outline-light">Log in</a>
+      <a href="{% url 'users:signup' %}" class="btn btn-light ml-2">Sign up</a>
+    </form>
     {% endif %}
   </div>
 </nav>
