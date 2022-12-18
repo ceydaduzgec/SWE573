@@ -89,3 +89,6 @@ class UserAccountTests(TestCase):
                 first_name="Josh",
                 password="asdsad",
             )
+
+
+# TODO: https://docs.djangoproject.com/en/4.0/topics/testing/tools/#making-requests

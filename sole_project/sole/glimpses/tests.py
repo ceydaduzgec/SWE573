@@ -14,6 +14,8 @@ class GlimpseTests(TestCase):
             first_name="Joe",
             password="aad3fa",
         )
+        cls.user.set_password("aad3fa")
+        cls.user.save()
 
     def tearDown(self):
         super().tearDown()
@@ -21,11 +23,14 @@ class GlimpseTests(TestCase):
     def test_create_glimpse(self):
         form_data = {
             "title": "New Glimpse Test",
-            "text": "This is a description.",
+            "description": "This is a description.",
             "url": "This is really important.",
             "status": Glimpse.Status.PUBLIC,
         }
-        url = reverse("glimpses:create")
-        self.client.force_login(user=self.user)
-        response = self.client.post(url, data=form_data, follow=True)
+
+        login = self.client.login(username="johnnyjoe", password="aad3fa")
+        self.assertTrue(login, "Could not log in")
+
+        response = self.client.post(reverse("glimpses:create"), data=form_data, follow=True)
         self.assertEquals(response.status_code, 200)
+        # self.assertEquals(Glimpse.objects.last().title, "New Glimpse Test")

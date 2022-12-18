@@ -14,7 +14,7 @@ class GlimpseFactory(DjangoModelFactory):
         model = Glimpse
 
     title = factory.fuzzy.FuzzyText(length=50)
-    text = factory.fuzzy.FuzzyText(length=255)
+    description = factory.fuzzy.FuzzyText(length=255)
     url = factory.Faker("url")
     status = factory.fuzzy.FuzzyChoice(Glimpse.Status.choices)
 

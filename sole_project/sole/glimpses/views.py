@@ -52,7 +52,7 @@ class GlimpseListView(ListView):
 class GlimpseCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Glimpse
     template_name = "create_glimpse.html"
-    fields = ["url", "title", "text", "tags", "status"]
+    fields = ["url", "title", "description", "tags", "status"]
     success_message = "Glimpse was created successfully"
     success_url = reverse_lazy("glimpses:list")
     pk_url_kwarg = "glimpse_id"
@@ -66,7 +66,7 @@ class GlimpseUpdateView(SuccessMessageMixin, OwnerRequiredMixin, UpdateView):
     model = Glimpse
     context_object_name = "glimpse"
     template_name = "update_glimpse.html"
-    fields = ["url", "title", "text", "tags", "status"]
+    fields = ["url", "title", "description", "tags", "status"]
     success_message = "Glimpse was updated successfully"
     success_url = reverse_lazy("glimpses:list")
     pk_url_kwarg = "glimpse_id"

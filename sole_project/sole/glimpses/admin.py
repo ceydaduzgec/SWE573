@@ -38,7 +38,7 @@ class GlimpsesAdmin(admin.ModelAdmin):
                 "fields": (
                     "title",
                     "url",
-                    "text",
+                    "description",
                     "status",
                     "author",
                     "creation_datetime",
