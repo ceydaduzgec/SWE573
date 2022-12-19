@@ -108,7 +108,7 @@ python manage.py createsuperuser
 6. Run the server.
 
 ```python
-python manage.py runserver 0:8080
+python manage.py runserver 0:8000
 ```
 
 To run all the tests:

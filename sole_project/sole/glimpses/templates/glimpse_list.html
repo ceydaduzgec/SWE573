@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+{% block header %}{% endblock header %}
 {% block content %}
 
   <div class="container">
@@ -67,5 +68,5 @@
             <button class="btn btn-secondary" type="button" onclick="location.href='?page={{ page_obj.paginator.num_pages }}'">Last</button>
         {% endif %}
     </span>
-</div>
+  </div>
 {% endblock content %}

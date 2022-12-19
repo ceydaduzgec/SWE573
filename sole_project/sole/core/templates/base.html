@@ -16,7 +16,9 @@
   <body>
     {% block body %}
       {% include "navbar.html" %}
-      {% include "sidebar.html" %}
+      {% if user.is_authenticated %}
+          {% include "sidebar.html" %}
+      {% endif %}
       {% include "messages.html" %}
       <div class="container-fluid mt-5">
         {% block content %}{% endblock %}

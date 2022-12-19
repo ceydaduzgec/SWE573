@@ -9,10 +9,6 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <a class="navbar-brand ml-3" href="{% url 'glimpses:create' %}"
-    >Share a Glimpse</a
-  >
-
   <div class="collapse navbar-collapse mr-5" id="navbarNav">
     {% if user.is_authenticated %}
     <a class="navbar-nav ml-auto" data-toggle="dropdown"href="{% url "users:profile" %}"">

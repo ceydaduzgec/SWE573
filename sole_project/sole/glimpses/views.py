@@ -27,6 +27,12 @@ class GlimpseListView(ListView):
     template_name = "glimpse_list.html"
     paginate_by = PAGINATION_NUMBER
 
+    def get_template_names(self):
+        if self.request.GET.get("username"):
+            return ["user_profile.html"]
+        else:
+            return ["glimpse_list.html"]
+
     def get_queryset(self):
         queryset = super().get_queryset()
 
@@ -39,6 +45,7 @@ class GlimpseListView(ListView):
 
         if username := self.request.GET.get("username"):
             queryset = queryset.filter(author__username=username)
+
         if tag := self.request.GET.get("tag"):
             queryset = queryset.filter(tags__name=tag)
 
@@ -52,7 +59,7 @@ class GlimpseListView(ListView):
 class GlimpseCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Glimpse
     template_name = "create_glimpse.html"
-    fields = ["url", "title", "description", "tags", "status"]
+    fields = ["url", "title", "description", "tags", "category", "status"]
     success_message = "Glimpse was created successfully"
     success_url = reverse_lazy("glimpses:list")
     pk_url_kwarg = "glimpse_id"
