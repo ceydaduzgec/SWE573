@@ -16,7 +16,7 @@
 
   <div class="collapse navbar-collapse mr-5" id="navbarNav">
     {% if user.is_authenticated %}
-    <a class="navbar-nav ml-auto" data-toggle="dropdown"href="{% url "users:profile" %}"">
+    <a class="navbar-nav ml-auto" data-toggle="dropdown" href="{% url 'users:profile' %}">
       {{ user.username }}
     </a>
 
