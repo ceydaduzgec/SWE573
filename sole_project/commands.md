@@ -8,6 +8,12 @@
 ## Pre-commit
 `git commit -m "Some comments" --no-verify`
 
+## Django
+`python manage.py showmigrations`
+
+`python manage.py migrate <app_name> <migration_number>`
+
+`python manage.py migrate --fake`
 ## Run Project
 
 `source tools/run_development.sh`
@@ -79,10 +85,10 @@ docker exec -it django_app sh
 
 Info:
 PYTHONUNBUFFERED:
-Setting the non-empty value of PYTHONUNBUFFERED means 
-that the python output is transmitted directly to the 
-terminal without being buffered and that allows displaying 
-the application’s output in real-time. 
+Setting the non-empty value of PYTHONUNBUFFERED means
+that the python output is transmitted directly to the
+terminal without being buffered and that allows displaying
+the application’s output in real-time.
 
 
 

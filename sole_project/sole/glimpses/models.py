@@ -1,20 +1,18 @@
 from datetime import timedelta
 
-from autoslug import AutoSlugField
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from sole.glimpses.managers import GlimpseManager
 
 User = get_user_model()
 
 
 class Tag(models.Model):
-    id = models.BigIntegerField(primary_key=True, editable=False)
-    name = models.CharField(_("Name"), max_length=255)
-    slug = AutoSlugField(_("Slug"), max_length=255, allow_unicode=True, populate_from="name")
+    name = models.CharField(_("Name"), max_length=128, unique=True)
 
     class Meta:
         verbose_name = _("Tag")
@@ -38,7 +36,6 @@ class Tag(models.Model):
 
 
 class Like(models.Model):
-    id = models.BigIntegerField(primary_key=True, editable=False)
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="likes", on_delete=models.CASCADE)
 
@@ -47,17 +44,16 @@ class Like(models.Model):
 
 
 class Comment(models.Model):
-    id = models.BigIntegerField(primary_key=True, editable=False)
     glimpse = models.ForeignKey("glimpses.Glimpse", on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
     comment = models.TextField(_("Comment"), max_length=2000, blank=True, null=False)
+    creation_datetime = models.DateTimeField(_("Created on"), auto_now_add=True)
 
     def __str__(self):
         return f"{self.comment}"
 
 
 class Space(models.Model):
-    id = models.BigIntegerField(primary_key=True, editable=False)
     title = models.CharField(_("Title on"), max_length=255, unique=False)
     description = models.CharField(_("Description"), max_length=255, blank=True, unique=False)
     creation_datetime = models.DateTimeField(_("Created on"), auto_now_add=True)
@@ -79,11 +75,12 @@ class Glimpse(models.Model):
         VIDEO = "video", _("Video")
         AUDIO = "audio", _("Audio")
         IMAGE = "image", _("Image")
+        READING = "reading", _("Reading")
         EVENT = "event", _("Event")
         PLACE = "place", _("Place")
         APP = "app", _("Application")
+        OTHER = "other", _("Other")
 
-    id = models.BigIntegerField(primary_key=True, editable=False)
     title = models.CharField(_("Title"), max_length=50)
     description = models.TextField(_("Description"), max_length=255, blank=True, null=False)
     url = models.URLField(_("URL"), max_length=255, blank=True)
@@ -101,6 +98,7 @@ class Glimpse(models.Model):
     comments = models.ManyToManyField(
         User, related_name="commented_glimpses", through="glimpses.Comment", verbose_name=_("Comments")
     )
+    objects = GlimpseManager()
 
     def __str__(self):
         return f"{self.author} - {self.creation_datetime}"

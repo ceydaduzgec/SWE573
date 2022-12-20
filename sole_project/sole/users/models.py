@@ -22,7 +22,8 @@ class User(AbstractUser):
     )
     email = models.EmailField(_("Email"), unique=True, blank=False)
     bio = models.TextField(_("Bio"), blank=True, null=False)
-
+    followers = models.ManyToManyField("User", related_name="follower_users", verbose_name=_("Followers"), blank=True)
+    following = models.ManyToManyField("User", related_name="following_users", verbose_name=_("Following"), blank=True)
     objects = UserManager()
 
     def get_absolute_url(self):

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+{% block header %}{% endblock header %}
 {% block content %}
 
   <div class="container">
@@ -56,14 +57,16 @@
         <button class="btn btn-secondary" type="button" onclick="location.href='?page={{ page_obj.previous_page_number }}'">Previous</button>
         {% endif %}
 
+        {% if page_obj.number != page_obj.paginator.num_pages %}
         <span class="current">
             Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
         </span>
+        {% endif %}
 
         {% if page_obj.has_next %}
             <button class="btn btn-secondary" type="button" onclick="location.href='?page={{ page_obj.next_page_number }}'">Next</button>
             <button class="btn btn-secondary" type="button" onclick="location.href='?page={{ page_obj.paginator.num_pages }}'">Last</button>
         {% endif %}
     </span>
-</div>
+  </div>
 {% endblock content %}
