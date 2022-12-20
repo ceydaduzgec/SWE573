@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -48,6 +49,11 @@ class GlimpseListView(ListView):
 
         if tag := self.request.GET.get("tag"):
             queryset = queryset.filter(tags__name=tag)
+
+        if query := self.request.GET.get("q"):
+            queryset = Glimpse.objects.filter(
+                Q(title__icontains=query) | Q(description__icontains=query) | Q(url__icontains=query)
+            )
 
         return queryset
 

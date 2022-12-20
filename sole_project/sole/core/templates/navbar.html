@@ -9,6 +9,11 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+  <form class="d-flex" role="search" method="GET" action="{% url 'glimpses:search' %}">
+    <input class="form-control me-2" name="q" type="text" placeholder="Search...">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+
   <div class="collapse navbar-collapse mr-5" id="navbarNav">
     {% if user.is_authenticated %}
     <a class="navbar-nav ml-auto" data-toggle="dropdown"href="{% url "users:profile" %}"">
