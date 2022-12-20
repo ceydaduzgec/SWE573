@@ -51,8 +51,11 @@ class GlimpseListView(ListView):
             queryset = queryset.filter(tags__name=tag)
 
         if query := self.request.GET.get("q"):
-            queryset = Glimpse.objects.filter(
-                Q(title__icontains=query) | Q(description__icontains=query) | Q(url__icontains=query)
+            queryset = Glimpse.objects.allowed_glimpses.filter(
+                Q(title__icontains=query)
+                | Q(description__icontains=query)
+                | Q(url__icontains=query)
+                | Q(author__username__icontains=query)
             )
 
         return queryset

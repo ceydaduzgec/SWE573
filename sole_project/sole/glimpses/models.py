@@ -6,6 +6,7 @@ from django.db.models import Count
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from sole.glimpses.managers import GlimpseManager
 
 User = get_user_model()
 
@@ -97,6 +98,7 @@ class Glimpse(models.Model):
     comments = models.ManyToManyField(
         User, related_name="commented_glimpses", through="glimpses.Comment", verbose_name=_("Comments")
     )
+    objects = GlimpseManager()
 
     def __str__(self):
         return f"{self.author} - {self.creation_datetime}"
