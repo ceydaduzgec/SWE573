@@ -40,7 +40,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3
 DEBUG = env("DJANGO_DEBUG", default=True)
 # CHANGE THIS AFTER DONE
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "*.amazonaws.com"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "ec2-54-91-110-14.compute-1.amazonaws.com"]
 
 AUTH_USER_MODEL = "users.User"
 
