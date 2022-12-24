@@ -19,7 +19,6 @@ ipdb
 pre-commit
 flake8
 django-crispy-forms
-django-environ
 
 #celery==5.2.7
 #flower==1.0.0
