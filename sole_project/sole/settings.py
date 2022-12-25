@@ -32,8 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = os.environ.get("DEBUG", default=True)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib")
-# default for development and test purposes
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
 if not DEBUG:
