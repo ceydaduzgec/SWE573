@@ -1,7 +1,7 @@
 Django==3.2.13
 djangorestframework==3.12.4
 psycopg2==2.9.3
-pillow==8.0.1
+pillow==9.3.0
 drf-extra-fields==3.1.1
 boto3==1.24.6
 drf-yasg==1.20.0
