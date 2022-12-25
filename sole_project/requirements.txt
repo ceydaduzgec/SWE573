@@ -13,6 +13,7 @@ argon2-cffi==21.3.0
 django-rich==1.4.0
 factory-boy==3.2.1
 django-autoslug==1.9.8
+django-dotenv
 
 coverage
 ipdb
