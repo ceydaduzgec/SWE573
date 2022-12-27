@@ -13,13 +13,13 @@ argon2-cffi==21.3.0
 django-rich==1.4.0
 factory-boy==3.2.1
 django-autoslug==1.9.8
+django-dotenv
 
 coverage
 ipdb
 pre-commit
 flake8
 django-crispy-forms
-django-environ
 
 #celery==5.2.7
 #flower==1.0.0

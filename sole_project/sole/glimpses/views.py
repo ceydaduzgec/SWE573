@@ -28,24 +28,10 @@ class GlimpseListView(ListView):
     template_name = "glimpse_list.html"
     paginate_by = PAGINATION_NUMBER
 
-    def get_template_names(self):
-        if self.request.GET.get("username"):
-            return ["user_profile.html"]
-        else:
-            return ["glimpse_list.html"]
-
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        if self.request.GET.get("status") == "draft":
-            queryset = queryset.filter(status=Glimpse.Status.DRAFT)
-        elif self.request.GET.get("status") == "private":
-            queryset = queryset.filter(status=Glimpse.Status.PRIVATE)
-        else:
-            queryset = queryset.filter(status=Glimpse.Status.PUBLIC)
-
-        if username := self.request.GET.get("username"):
-            queryset = queryset.filter(author__username=username)
+        queryset = queryset.filter(status=Glimpse.Status.PUBLIC)
 
         if tag := self.request.GET.get("tag"):
             queryset = queryset.filter(tags__name=tag)
@@ -59,10 +45,6 @@ class GlimpseListView(ListView):
             )
 
         return queryset
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        return context
 
 
 class GlimpseCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -99,6 +81,22 @@ class GlimpseDeleteView(SuccessMessageMixin, OwnerRequiredMixin, DeleteView):
 
 @login_required()
 def like(request, glimpse_id, *args, **kwargs):
+
+    if request.method == "POST":
+        glimpse = get_object_or_404(Glimpse, pk=glimpse_id)
+        like, created = Like.objects.get_or_create(glimpse=glimpse, user=request.user)
+
+        if not created:
+            like.delete()
+        return redirect("glimpses:list")
+
+    else:
+        # need a warning here
+        return redirect("glimpses:list")
+
+
+@login_required()  # TODO
+def follow(request, glimpse_id, *args, **kwargs):
 
     if request.method == "POST":
         glimpse = get_object_or_404(Glimpse, pk=glimpse_id)

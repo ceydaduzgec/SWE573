@@ -66,8 +66,8 @@
   <body>
     <div class="sidebar">
       <a class="active" href="{% url 'glimpses:create' %}">Share a Glimpse</a>
-      <a href="{% url "glimpses:list" %}?username={{user.username}}">My Glimpses</a>
-      <a href="{% url "glimpses:list" %}?username={{user.username}}&status=draft">My Drafts</a>
+      <a href="{% url 'users:profile' user.id %}">My Glimpses</a>
+      <a href="{% url 'users:profile' user.id %}?draft=True">My Drafts</a>
       <a href="{% url "users:change_password" %}">Settings</a>
       <a href="{% url 'users:logout' %}">Log out</a>
 

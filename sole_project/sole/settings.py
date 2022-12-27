@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
 from pathlib import Path
 
 from django.contrib.messages import constants as messages
-from environ import Env
 
 MESSAGE_TAGS = {
     messages.DEBUG: "alert-info",
@@ -22,25 +22,21 @@ MESSAGE_TAGS = {
     messages.ERROR: "alert-danger",
 }
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-env = Env()
-env.read_env(env_file=".env")
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get("DEBUG", default=True)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY", default="k8pmtm-1lktmj_x^axio41cyve!q*rrt3r)+b(-zw_^&qp4=ib")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DJANGO_DEBUG", default=True)
-# CHANGE THIS AFTER DONE
-
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "ec2-54-91-110-14.compute-1.amazonaws.com"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOSTS")]
 
 AUTH_USER_MODEL = "users.User"
 
@@ -99,23 +95,16 @@ WSGI_APPLICATION = "sole.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
-"""
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-"""
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DB_NAME", default="sole_db"),
-        "USER": env("DB_USER", default="jay"),
-        "PASSWORD": env("DB_PASSWORD", default="test"),
-        "HOST": env("DB_HOST", default="sole_db"),
-        "PORT": env("DB_PORT", default="5432"),
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get(
+            "DB_HOST",
+        ),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
