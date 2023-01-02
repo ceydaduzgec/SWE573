@@ -114,7 +114,7 @@ python manage.py createsuperuser
 python manage.py runserver 0:8000
 ```
 
-7. Go to http://127.0.0.1/ or http://127.0.0.1:80/ from your browser.
+8. Go to http://127.0.0.1/ or http://127.0.0.1:80/ from your browser.
 
 To run all the tests:
 
