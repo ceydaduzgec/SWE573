@@ -93,23 +93,28 @@ This projects is for the SWE 573 Software Development Practice course of Boğazi
    ```sh
    source tools/run_development.sh
    ```
-4. Migrate the database.
+
+4. Rename the "sample.env.txt" to ".env" file under sole_project and put related values.
+
+5. Migrate the database.
 
 ```python
 python manage.py migrate
 ```
 
-5. (Optional) Create a super user for admin panel.
+6. (Optional) Create a super user for admin panel.
 
 ```python
 python manage.py createsuperuser
 ```
 
-6. Run the server.
+7. Run the server.
 
 ```python
 python manage.py runserver 0:8000
 ```
+
+7. Go to http://127.0.0.1/ or http://127.0.0.1:80/ from your browser.
 
 To run all the tests:
 
@@ -152,8 +157,8 @@ pre-commit autoupdate
 ## Roadmap
 
 - [x] Milestone 1
-- [ ] Milestone 2
-- [ ] Milestone 3
+- [x] Milestone 2
+- [x] Milestone 3
 
 See the [open issues](https://github.com/ceydaduzgec/SWE573/issues) for a full list of proposed features (and known issues).
 
