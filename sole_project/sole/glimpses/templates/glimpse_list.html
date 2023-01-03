@@ -12,7 +12,7 @@
           <h2 class="card-title"><a href="{% url 'users:profile' glimpse.author.id %}">{{glimpse.author.username}}</a></h2>
           <p class="card-text">{{ glimpse.title }}</p>
           <p class="card-text"><a href="{{glimpse.url}}" target ="_blank">{{glimpse.url}}</a></p>
-          <p class="card-text">{{ glimpse.text }}</p>
+          <p class="card-text">{{ glimpse.description }}</p>
 
           {% for tag in glimpse.tags.all %}
             <a href="{% url "glimpses:list" %}?tag={{tag.name}}">#{{ tag.name }}</a>
